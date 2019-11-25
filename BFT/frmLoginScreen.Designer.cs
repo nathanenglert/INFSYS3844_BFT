@@ -1,6 +1,6 @@
 ﻿namespace BFT
 {
-    partial class frmLogin
+    partial class frmLoginScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -30,12 +30,12 @@
         {
             this.SuspendLayout();
             // 
-            // frmLogin
+            // frmLoginScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "frmLogin";
+            this.Name = "frmLoginScreen";
             this.Text = "Form1";
             this.ResumeLayout(false);
 
