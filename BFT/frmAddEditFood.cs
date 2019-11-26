@@ -84,17 +84,13 @@ namespace BFT
             }
         }
 
-        // Single source for connection string
-        private string GetDBConnection()
-        {
-            return @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=\\Mac\Home\Documents\UMSL\INFSYS_6805_C_Sharp\Projects\INFSYS3844_BFT\BFT\BFT_DB.mdf;Integrated Security=True";
-        }
-
         private void InsertFoodItemData(int accountID, string foodName, decimal carbs, decimal proteins, decimal fats, decimal calories)
         {
+            // New DatabaseMethod instance
+            DatabaseMethods db = new DatabaseMethods();
 
             // Setup connection
-            SqlConnection conn = new SqlConnection(GetDBConnection());
+            SqlConnection conn = new SqlConnection(db.DBConnectionString());
 
             // Setup SQL commands insert data
             SqlCommand cmd = new SqlCommand
@@ -121,8 +117,11 @@ namespace BFT
         // Load current food items user has entered on form load or food item added
         private void LoadFoodItemData(int accountID)
         {
+            // New DatabaseMethod instance
+            DatabaseMethods db = new DatabaseMethods();
+
             // Setup connection
-            SqlConnection conn = new SqlConnection(GetDBConnection());
+            SqlConnection conn = new SqlConnection(db.DBConnectionString());
 
             // Setup SQL commands and query
             SqlCommand cmd = new SqlCommand
