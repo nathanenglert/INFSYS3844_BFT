@@ -16,8 +16,7 @@ namespace BFT
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new frmLoginScreen());
-            Application.Run(new frmAddEditFood());
+            Application.Run(new frmLoginScreen());
         }
     }
 }

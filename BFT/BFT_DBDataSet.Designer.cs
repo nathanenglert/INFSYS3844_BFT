@@ -1053,7 +1053,7 @@ namespace BFT {
             
             private global::System.Data.DataColumn columncalories;
             
-            private global::System.Data.DataColumn columnadded_by_user_id;
+            private global::System.Data.DataColumn columnadded_by_account_id;
             
             private global::System.Data.DataColumn columncreated_at;
             
@@ -1144,9 +1144,9 @@ namespace BFT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn added_by_user_idColumn {
+            public global::System.Data.DataColumn added_by_account_idColumn {
                 get {
-                    return this.columnadded_by_user_id;
+                    return this.columnadded_by_account_id;
                 }
             }
             
@@ -1211,7 +1211,7 @@ namespace BFT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public foodsRow AddfoodsRow(string name, decimal carbohydrates, decimal proteins, decimal fats, string calories, string added_by_user_id, System.DateTime created_at, System.DateTime updated_at, System.DateTime deleted_at) {
+            public foodsRow AddfoodsRow(string name, decimal carbohydrates, decimal proteins, decimal fats, string calories, string added_by_account_id, System.DateTime created_at, System.DateTime updated_at, System.DateTime deleted_at) {
                 foodsRow rowfoodsRow = ((foodsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1220,7 +1220,7 @@ namespace BFT {
                         proteins,
                         fats,
                         calories,
-                        added_by_user_id,
+                        added_by_account_id,
                         created_at,
                         updated_at,
                         deleted_at};
@@ -1259,7 +1259,7 @@ namespace BFT {
                 this.columnproteins = base.Columns["proteins"];
                 this.columnfats = base.Columns["fats"];
                 this.columncalories = base.Columns["calories"];
-                this.columnadded_by_user_id = base.Columns["added_by_user_id"];
+                this.columnadded_by_account_id = base.Columns["added_by_account_id"];
                 this.columncreated_at = base.Columns["created_at"];
                 this.columnupdated_at = base.Columns["updated_at"];
                 this.columndeleted_at = base.Columns["deleted_at"];
@@ -1280,8 +1280,8 @@ namespace BFT {
                 base.Columns.Add(this.columnfats);
                 this.columncalories = new global::System.Data.DataColumn("calories", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncalories);
-                this.columnadded_by_user_id = new global::System.Data.DataColumn("added_by_user_id", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnadded_by_user_id);
+                this.columnadded_by_account_id = new global::System.Data.DataColumn("added_by_account_id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnadded_by_account_id);
                 this.columncreated_at = new global::System.Data.DataColumn("created_at", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncreated_at);
                 this.columnupdated_at = new global::System.Data.DataColumn("updated_at", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
@@ -1303,8 +1303,8 @@ namespace BFT {
                 this.columnfats.AllowDBNull = false;
                 this.columncalories.AllowDBNull = false;
                 this.columncalories.MaxLength = 10;
-                this.columnadded_by_user_id.AllowDBNull = false;
-                this.columnadded_by_user_id.MaxLength = 2147483647;
+                this.columnadded_by_account_id.AllowDBNull = false;
+                this.columnadded_by_account_id.MaxLength = 2147483647;
                 this.columncreated_at.AllowDBNull = false;
                 this.columnupdated_at.AllowDBNull = false;
             }
@@ -1705,12 +1705,12 @@ namespace BFT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string added_by_user_id {
+            public string added_by_account_id {
                 get {
-                    return ((string)(this[this.tablefoods.added_by_user_idColumn]));
+                    return ((string)(this[this.tablefoods.added_by_account_idColumn]));
                 }
                 set {
-                    this[this.tablefoods.added_by_user_idColumn] = value;
+                    this[this.tablefoods.added_by_account_idColumn] = value;
                 }
             }
             
@@ -2724,7 +2724,7 @@ SELECT Id, account_id, food_id, created_at, updated_at, deleted_at FROM food_log
             tableMapping.ColumnMappings.Add("proteins", "proteins");
             tableMapping.ColumnMappings.Add("fats", "fats");
             tableMapping.ColumnMappings.Add("calories", "calories");
-            tableMapping.ColumnMappings.Add("added_by_user_id", "added_by_user_id");
+            tableMapping.ColumnMappings.Add("added_by_account_id", "added_by_account_id");
             tableMapping.ColumnMappings.Add("created_at", "created_at");
             tableMapping.ColumnMappings.Add("updated_at", "updated_at");
             tableMapping.ColumnMappings.Add("deleted_at", "deleted_at");
@@ -2744,29 +2744,29 @@ SELECT Id, account_id, food_id, created_at, updated_at, deleted_at FROM food_log
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_deleted_at", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "deleted_at", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[foods] ([name], [carbohydrates], [proteins], [fats], [calories], [added_by_user_id], [created_at], [updated_at], [deleted_at]) VALUES (@name, @carbohydrates, @proteins, @fats, @calories, @added_by_user_id, @created_at, @updated_at, @deleted_at);
-SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_user_id, created_at, updated_at, deleted_at FROM foods WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[foods] ([name], [carbohydrates], [proteins], [fats], [calories], [added_by_account_id], [created_at], [updated_at], [deleted_at]) VALUES (@name, @carbohydrates, @proteins, @fats, @calories, @added_by_account_id, @created_at, @updated_at, @deleted_at);
+SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_account_id, created_at, updated_at, deleted_at FROM foods WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@carbohydrates", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "carbohydrates", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@proteins", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "proteins", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fats", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "fats", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@calories", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "calories", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@added_by_user_id", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "added_by_user_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@added_by_account_id", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "added_by_account_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@created_at", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "created_at", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@updated_at", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "updated_at", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@deleted_at", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "deleted_at", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[foods] SET [name] = @name, [carbohydrates] = @carbohydrates, [proteins] = @proteins, [fats] = @fats, [calories] = @calories, [added_by_user_id] = @added_by_user_id, [created_at] = @created_at, [updated_at] = @updated_at, [deleted_at] = @deleted_at WHERE (([Id] = @Original_Id) AND ([carbohydrates] = @Original_carbohydrates) AND ([proteins] = @Original_proteins) AND ([fats] = @Original_fats) AND ([calories] = @Original_calories) AND ([created_at] = @Original_created_at) AND ([updated_at] = @Original_updated_at) AND ((@IsNull_deleted_at = 1 AND [deleted_at] IS NULL) OR ([deleted_at] = @Original_deleted_at)));
-SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_user_id, created_at, updated_at, deleted_at FROM foods WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[foods] SET [name] = @name, [carbohydrates] = @carbohydrates, [proteins] = @proteins, [fats] = @fats, [calories] = @calories, [added_by_account_id] = @added_by_account_id, [created_at] = @created_at, [updated_at] = @updated_at, [deleted_at] = @deleted_at WHERE (([Id] = @Original_Id) AND ([carbohydrates] = @Original_carbohydrates) AND ([proteins] = @Original_proteins) AND ([fats] = @Original_fats) AND ([calories] = @Original_calories) AND ([created_at] = @Original_created_at) AND ([updated_at] = @Original_updated_at) AND ((@IsNull_deleted_at = 1 AND [deleted_at] IS NULL) OR ([deleted_at] = @Original_deleted_at)));
+SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_account_id, created_at, updated_at, deleted_at FROM foods WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@carbohydrates", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "carbohydrates", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@proteins", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "proteins", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fats", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "fats", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@calories", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "calories", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@added_by_user_id", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "added_by_user_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@added_by_account_id", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "added_by_account_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@created_at", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "created_at", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@updated_at", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "updated_at", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@deleted_at", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "deleted_at", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -2795,8 +2795,8 @@ SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_user_id, crea
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_user_id, creat" +
-                "ed_at, updated_at, deleted_at FROM dbo.foods";
+            this._commandCollection[0].CommandText = "SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_account_id, cr" +
+                "eated_at, updated_at, deleted_at FROM dbo.foods";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -2898,7 +2898,7 @@ SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_user_id, crea
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name, decimal carbohydrates, decimal proteins, decimal fats, string calories, string added_by_user_id, System.DateTime created_at, System.DateTime updated_at, global::System.Nullable<global::System.DateTime> deleted_at) {
+        public virtual int Insert(string name, decimal carbohydrates, decimal proteins, decimal fats, string calories, string added_by_account_id, System.DateTime created_at, System.DateTime updated_at, global::System.Nullable<global::System.DateTime> deleted_at) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -2914,11 +2914,11 @@ SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_user_id, crea
             else {
                 this.Adapter.InsertCommand.Parameters[4].Value = ((string)(calories));
             }
-            if ((added_by_user_id == null)) {
-                throw new global::System.ArgumentNullException("added_by_user_id");
+            if ((added_by_account_id == null)) {
+                throw new global::System.ArgumentNullException("added_by_account_id");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(added_by_user_id));
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(added_by_account_id));
             }
             this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(created_at));
             this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(updated_at));
@@ -2954,7 +2954,7 @@ SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_user_id, crea
                     decimal proteins, 
                     decimal fats, 
                     string calories, 
-                    string added_by_user_id, 
+                    string added_by_account_id, 
                     System.DateTime created_at, 
                     System.DateTime updated_at, 
                     global::System.Nullable<global::System.DateTime> deleted_at, 
@@ -2982,11 +2982,11 @@ SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_user_id, crea
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(calories));
             }
-            if ((added_by_user_id == null)) {
-                throw new global::System.ArgumentNullException("added_by_user_id");
+            if ((added_by_account_id == null)) {
+                throw new global::System.ArgumentNullException("added_by_account_id");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(added_by_user_id));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(added_by_account_id));
             }
             this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(created_at));
             this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(updated_at));
@@ -3043,7 +3043,7 @@ SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_user_id, crea
                     decimal proteins, 
                     decimal fats, 
                     string calories, 
-                    string added_by_user_id, 
+                    string added_by_account_id, 
                     System.DateTime created_at, 
                     System.DateTime updated_at, 
                     global::System.Nullable<global::System.DateTime> deleted_at, 
@@ -3055,7 +3055,7 @@ SELECT Id, name, carbohydrates, proteins, fats, calories, added_by_user_id, crea
                     System.DateTime Original_created_at, 
                     System.DateTime Original_updated_at, 
                     global::System.Nullable<global::System.DateTime> Original_deleted_at) {
-            return this.Update(name, carbohydrates, proteins, fats, calories, added_by_user_id, created_at, updated_at, deleted_at, Original_Id, Original_carbohydrates, Original_proteins, Original_fats, Original_calories, Original_created_at, Original_updated_at, Original_deleted_at, Original_Id);
+            return this.Update(name, carbohydrates, proteins, fats, calories, added_by_account_id, created_at, updated_at, deleted_at, Original_Id, Original_carbohydrates, Original_proteins, Original_fats, Original_calories, Original_created_at, Original_updated_at, Original_deleted_at, Original_Id);
         }
     }
     

@@ -39,9 +39,14 @@
             this.lblCarbs = new System.Windows.Forms.Label();
             this.btnFoodName = new System.Windows.Forms.Label();
             this.gbEditFoodItems = new System.Windows.Forms.GroupBox();
+            this.dgvFoodItems = new System.Windows.Forms.DataGridView();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnMainMenu = new System.Windows.Forms.Button();
+            this.btnUpdateFood = new System.Windows.Forms.Button();
+            this.btnDeleteFood = new System.Windows.Forms.Button();
             this.gbAddFoodItem.SuspendLayout();
+            this.gbEditFoodItems.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFoodItems)).BeginInit();
             this.SuspendLayout();
             // 
             // gbAddFoodItem
@@ -58,7 +63,7 @@
             this.gbAddFoodItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbAddFoodItem.Location = new System.Drawing.Point(12, 12);
             this.gbAddFoodItem.Name = "gbAddFoodItem";
-            this.gbAddFoodItem.Size = new System.Drawing.Size(1450, 478);
+            this.gbAddFoodItem.Size = new System.Drawing.Size(1950, 478);
             this.gbAddFoodItem.TabIndex = 0;
             this.gbAddFoodItem.TabStop = false;
             this.gbAddFoodItem.Text = "Add Food Item";
@@ -150,19 +155,35 @@
             // 
             // gbEditFoodItems
             // 
+            this.gbEditFoodItems.Controls.Add(this.btnDeleteFood);
+            this.gbEditFoodItems.Controls.Add(this.btnUpdateFood);
             this.gbEditFoodItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbEditFoodItems.Location = new System.Drawing.Point(12, 522);
+            this.gbEditFoodItems.Location = new System.Drawing.Point(1640, 522);
             this.gbEditFoodItems.Name = "gbEditFoodItems";
-            this.gbEditFoodItems.Size = new System.Drawing.Size(1450, 598);
+            this.gbEditFoodItems.Size = new System.Drawing.Size(322, 283);
             this.gbEditFoodItems.TabIndex = 1;
             this.gbEditFoodItems.TabStop = false;
             this.gbEditFoodItems.Text = "Edit Food Items";
             // 
+            // dgvFoodItems
+            // 
+            this.dgvFoodItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvFoodItems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvFoodItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFoodItems.Location = new System.Drawing.Point(13, 522);
+            this.dgvFoodItems.Name = "dgvFoodItems";
+            this.dgvFoodItems.ReadOnly = true;
+            this.dgvFoodItems.RowHeadersWidth = 82;
+            this.dgvFoodItems.RowTemplate.Height = 33;
+            this.dgvFoodItems.Size = new System.Drawing.Size(1599, 695);
+            this.dgvFoodItems.TabIndex = 0;
+            // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(781, 1167);
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Location = new System.Drawing.Point(1646, 1045);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(225, 50);
+            this.btnExit.Size = new System.Drawing.Size(300, 100);
             this.btnExit.TabIndex = 2;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -170,13 +191,34 @@
             // 
             // btnMainMenu
             // 
-            this.btnMainMenu.Location = new System.Drawing.Point(379, 1167);
+            this.btnMainMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMainMenu.Location = new System.Drawing.Point(1646, 927);
             this.btnMainMenu.Name = "btnMainMenu";
-            this.btnMainMenu.Size = new System.Drawing.Size(225, 50);
+            this.btnMainMenu.Size = new System.Drawing.Size(300, 100);
             this.btnMainMenu.TabIndex = 3;
             this.btnMainMenu.Text = "Return to Main Menu";
             this.btnMainMenu.UseVisualStyleBackColor = true;
             this.btnMainMenu.Click += new System.EventHandler(this.btnMainMenu_Click);
+            // 
+            // btnUpdateFood
+            // 
+            this.btnUpdateFood.Location = new System.Drawing.Point(6, 53);
+            this.btnUpdateFood.Name = "btnUpdateFood";
+            this.btnUpdateFood.Size = new System.Drawing.Size(300, 100);
+            this.btnUpdateFood.TabIndex = 1;
+            this.btnUpdateFood.Text = "Update Food";
+            this.btnUpdateFood.UseVisualStyleBackColor = true;
+            this.btnUpdateFood.Click += new System.EventHandler(this.btnUpdateFood_Click);
+            // 
+            // btnDeleteFood
+            // 
+            this.btnDeleteFood.Location = new System.Drawing.Point(6, 160);
+            this.btnDeleteFood.Name = "btnDeleteFood";
+            this.btnDeleteFood.Size = new System.Drawing.Size(300, 100);
+            this.btnDeleteFood.TabIndex = 2;
+            this.btnDeleteFood.Text = "Delete Food";
+            this.btnDeleteFood.UseVisualStyleBackColor = true;
+            this.btnDeleteFood.Click += new System.EventHandler(this.btnDeleteFood_Click);
             // 
             // frmAddEditFood
             // 
@@ -185,16 +227,18 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1474, 1229);
+            this.ClientSize = new System.Drawing.Size(1974, 1229);
             this.Controls.Add(this.btnMainMenu);
             this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.dgvFoodItems);
             this.Controls.Add(this.gbEditFoodItems);
             this.Controls.Add(this.gbAddFoodItem);
-            this.MaximumSize = new System.Drawing.Size(1500, 1300);
             this.Name = "frmAddEditFood";
             this.Text = "Manage Food Items";
             this.gbAddFoodItem.ResumeLayout(false);
             this.gbAddFoodItem.PerformLayout();
+            this.gbEditFoodItems.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFoodItems)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -214,5 +258,8 @@
         private System.Windows.Forms.TextBox tbProtein;
         private System.Windows.Forms.TextBox tbCarbs;
         private System.Windows.Forms.TextBox tbFoodName;
+        private System.Windows.Forms.DataGridView dgvFoodItems;
+        private System.Windows.Forms.Button btnDeleteFood;
+        private System.Windows.Forms.Button btnUpdateFood;
     }
 }
