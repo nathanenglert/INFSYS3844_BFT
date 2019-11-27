@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace BFT
 {
@@ -10,7 +6,7 @@ namespace BFT
     {
         public string DBConnectionString()
         {
-            return @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=\\Mac\Home\Documents\UMSL\INFSYS_6805_C_Sharp\Projects\INFSYS3844_BFT\BFT\BFT_DB.mdf;Integrated Security=True";
+            return @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + Directory.GetCurrentDirectory() + @"\BFT_DB.mdf;Integrated Security=True";
         }
     }
 }
