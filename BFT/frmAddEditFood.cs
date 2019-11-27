@@ -17,7 +17,7 @@ namespace BFT
         public frmAddEditFood()
         {
             InitializeComponent();
-            // Need to make sure this is updated to capture global account ID variable
+            ///// Need to make sure this is updated to capture global account ID variable /////
             LoadFoodItemData(1);
         }
 
@@ -50,7 +50,7 @@ namespace BFT
             }
         }
 
-        ///// Code to block to manipulate food items /////
+        ///// Code block to manipulate food items /////
         // Write food input to table when save button is clicked
         private void btnSaveFood_Click(object sender, EventArgs e)
         {
@@ -62,15 +62,18 @@ namespace BFT
             else
             {
                 // Capture input values and transform to proper types
-                string foodName = tbFoodName.Text;
-                decimal carbs = decimal.Parse(tbCarbs.Text);
-                decimal fats = decimal.Parse(tbFats.Text);
-                decimal proteins = decimal.Parse(tbProtein.Text);
-                decimal calories = (carbs * 4) + (fats * 9) + (proteins * 4);
+                Object[] foodObject = new Object[] {1, // account id - 0
+                                                    tbFoodName.Text, // food - 1
+                                                    decimal.Parse(tbCarbs.Text), // carbohydrates - 2
+                                                    decimal.Parse(tbFats.Text), // fats - 3
+                                                    decimal.Parse(tbProtein.Text), // proteins - 4
+                                                    (decimal.Parse(tbCarbs.Text) * 4) + (decimal.Parse(tbFats.Text) * 9) +
+                                                    (decimal.Parse(tbProtein.Text) * 4) // calculated calories - 5
+                };
 
                 // Insert data into foods table
-                // Need to make sure this is updated to capture global account ID variable
-                InsertFoodItemData(1, foodName, carbs, proteins, fats, calories);
+                ///// Need to make sure this is updated to capture global account ID variable /////
+                InsertFoodItemData(foodObject);
 
                 // Reset add food fields
                 tbFoodName.Text = "";
@@ -79,42 +82,12 @@ namespace BFT
                 tbProtein.Text = "";
 
                 // After table is written to, refresh food items data grid
-                // Need to make sure this is updated to capture global account ID variable
+                ///// Need to make sure this is updated to capture global account ID variable /////
                 LoadFoodItemData(1);
             }
         }
 
-        private void InsertFoodItemData(int accountID, string foodName, decimal carbs, decimal proteins, decimal fats, decimal calories)
-        {
-            // New DatabaseMethod instance
-            DatabaseMethods db = new DatabaseMethods();
-
-            // Setup connection
-            SqlConnection conn = new SqlConnection(db.DBConnectionString());
-
-            // Setup SQL commands insert data
-            SqlCommand cmd = new SqlCommand
-            {
-                CommandType = CommandType.Text,
-                CommandText = @"INSERT INTO foods (name, carbohydrates, proteins, fats, calories, added_by_account_id) VALUES ('" +
-                               foodName + "'," + carbs + "," + proteins + "," + fats + "," + calories + "," + accountID + ")",
-                Connection = conn
-            };
-
-            Console.WriteLine(cmd.CommandText);
-
-            // Open connection
-            conn.Open();
-
-            // Execute insert
-            cmd.ExecuteNonQuery();
-
-            // Close connections
-            cmd.Dispose();
-            conn.Close();
-        }
-
-        // Load current food items user has entered on form load or food item added
+        // Load current food items user has entered on form load or when food item added / edited
         private void LoadFoodItemData(int accountID)
         {
             // New DatabaseMethod instance
@@ -150,18 +123,208 @@ namespace BFT
             dAdapter.Fill(ds);
 
             dgvFoodItems.DataSource = ds.Tables[0];
+            dgvFoodItems.ReadOnly = false;
+            dgvFoodItems.Columns[0].ReadOnly = true;
+            dgvFoodItems.Columns[5].ReadOnly = true;
+            dgvFoodItems.Columns[6].ReadOnly = true;
+
+        }
+
+        // Load a new food item to the foods table
+        private void InsertFoodItemData(Object[] foodObject)
+        {
+            // New DatabaseMethod instance
+            DatabaseMethods db = new DatabaseMethods();
+
+            // Setup connection
+            SqlConnection conn = new SqlConnection(db.DBConnectionString());
+
+            // Setup SQL commands insert data
+            SqlCommand cmd = new SqlCommand
+            {
+                CommandType = CommandType.Text,
+                CommandText = @"INSERT INTO foods (name, carbohydrates, proteins, fats, calories, added_by_account_id) VALUES ('" +
+                               foodObject[1] + "'," + foodObject[2] + "," + foodObject[4] + "," +
+                               foodObject[3] + "," + foodObject[5] + "," + foodObject[0] + ")",
+                Connection = conn
+            };
+
+            // Open connection
+            conn.Open();
+
+            // Execute insert
+            cmd.ExecuteNonQuery();
+
+            // Close connections
+            cmd.Dispose();
+            conn.Close();
         }
 
         // Update selected row of data with changes
         private void btnUpdateFood_Click(object sender, EventArgs e)
         {
+            // Capture highlighted row
+            int rowIndex = dgvFoodItems.CurrentCell.RowIndex;
 
+            // Capture highlighted row
+            DataGridViewRow row = dgvFoodItems.Rows[rowIndex];
+
+            // Capture row values in an object
+            Object[] rowObject = new Object[] {row.Cells[0].Value, // id
+                                               row.Cells[1].Value, // name
+                                               row.Cells[2].Value, // carbohydrates
+                                               row.Cells[3].Value, // proteins
+                                               row.Cells[4].Value, // fats
+            };
+
+            // Test values to see if there are changes - Do nothing if not
+            if (EvaluateFoodUpdate(rowObject))
+            {
+                UpdateFood(rowObject);
+            }
+
+            // After table is written to, refresh food items data grid
+            ///// Need to make sure this is updated to capture global account ID variable /////
+            LoadFoodItemData(1);
+        }
+
+        // Evaluate changes to a food in the database
+        private bool EvaluateFoodUpdate(object[] rowObject)
+        {
+            // Variables to capture values query returns
+            // Extract values from query
+            string foodName = "a";
+            decimal carbs = 0.0M, proteins = 0.0M, fats = 0.0M;
+
+            // New DatabaseMethod instance
+            DatabaseMethods db = new DatabaseMethods();
+
+            // Setup connection
+            SqlConnection conn = new SqlConnection(db.DBConnectionString());
+
+            // Setup SQL commands and query
+            SqlCommand cmd = new SqlCommand
+            {
+                CommandType = CommandType.Text,
+                CommandText = @"SELECT
+                                id
+                                ,name
+                                ,carbohydrates
+                                ,proteins
+                                ,fats
+                                FROM
+                                foods
+                                WHERE
+                                id = " + rowObject[0],
+                Connection = conn
+            };
+            SqlDataReader reader;
+
+            // Open connection
+            conn.Open();
+
+            // Query users table
+            reader = cmd.ExecuteReader();
+
+            // Read data returned and assign to above variables
+            if (reader.Read())
+            {
+                foodName = reader.GetString(reader.GetOrdinal("name"));
+                carbs = reader.GetDecimal(reader.GetOrdinal("carbohydrates"));
+                proteins = reader.GetDecimal(reader.GetOrdinal("proteins"));
+                fats = reader.GetDecimal(reader.GetOrdinal("fats"));
+            }
+
+            // Close connections
+            reader.Close();
+            cmd.Dispose();
+            conn.Close();
+
+            // Check database values against new values
+            if (foodName != rowObject[1].ToString() | carbs != Convert.ToDecimal(rowObject[2]) |
+                proteins != Convert.ToDecimal(rowObject[3]) | fats != Convert.ToDecimal(rowObject[4]))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        // Update food in the database
+        private void UpdateFood(object[] rowObject)
+        {
+            // New DatabaseMethod instance
+            DatabaseMethods db = new DatabaseMethods();
+
+            // Setup connection
+            SqlConnection conn = new SqlConnection(db.DBConnectionString());
+
+            // Setup SQL commands insert data
+            SqlCommand cmd = new SqlCommand
+            {
+                CommandType = CommandType.Text,
+                CommandText = @"UPDATE foods SET name = '" + rowObject[1] + "', " +
+                                "carbohydrates = " + rowObject[2] + ", " +
+                                "proteins = " + rowObject[3] + ", " + 
+                                "fats = " + rowObject[4] + ", " +
+                                "calories = (" + rowObject[2] + " * 4.0) + (" + rowObject[3] + " * 4.0) + (" + rowObject[4] + " * 9.0), " + 
+                                "updated_at = GETDATE() " +
+                                "WHERE id = " + rowObject[0],
+                Connection = conn
+            };
+
+            // Open connection
+            conn.Open();
+
+            // Execute insert
+            cmd.ExecuteNonQuery();
+
+            // Close connections
+            cmd.Dispose();
+            conn.Close();
         }
 
         // Delete selected row of data - This will only put a data into deleted at column
         private void btnDeleteFood_Click(object sender, EventArgs e)
         {
+            // Capture highlighted row
+            int rowIndex = dgvFoodItems.CurrentCell.RowIndex;
 
+            // Capture highlighted row
+            DataGridViewRow row = dgvFoodItems.Rows[rowIndex];
+
+            // Capture food id row
+            int foodID = Convert.ToInt32(row.Cells[0].Value);
+
+            // New DatabaseMethod instance
+            DatabaseMethods db = new DatabaseMethods();
+
+            // Setup connection
+            SqlConnection conn = new SqlConnection(db.DBConnectionString());
+
+            // Setup SQL commands insert data
+            SqlCommand cmd = new SqlCommand
+            {
+                CommandType = CommandType.Text,
+                CommandText = @"DELETE FROM foods WHERE id = " + foodID,
+                Connection = conn
+            };
+
+            // Open connection
+            conn.Open();
+
+            // Execute insert
+            cmd.ExecuteNonQuery();
+
+            // Close connections
+            cmd.Dispose();
+            conn.Close();
+
+            // After the record is soft deleted, refresh food items data grid
+            ///// Need to make sure this is updated to capture global account ID variable /////
+            LoadFoodItemData(1);
         }
 
         private void btnMainMenu_Click(object sender, EventArgs e)
