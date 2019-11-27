@@ -39,11 +39,11 @@
             this.lblCarbs = new System.Windows.Forms.Label();
             this.btnFoodName = new System.Windows.Forms.Label();
             this.gbEditFoodItems = new System.Windows.Forms.GroupBox();
+            this.btnDeleteFood = new System.Windows.Forms.Button();
+            this.btnUpdateFood = new System.Windows.Forms.Button();
             this.dgvFoodItems = new System.Windows.Forms.DataGridView();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnMainMenu = new System.Windows.Forms.Button();
-            this.btnUpdateFood = new System.Windows.Forms.Button();
-            this.btnDeleteFood = new System.Windows.Forms.Button();
             this.gbAddFoodItem.SuspendLayout();
             this.gbEditFoodItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoodItems)).BeginInit();
@@ -165,6 +165,26 @@
             this.gbEditFoodItems.TabStop = false;
             this.gbEditFoodItems.Text = "Edit Food Items";
             // 
+            // btnDeleteFood
+            // 
+            this.btnDeleteFood.Location = new System.Drawing.Point(6, 168);
+            this.btnDeleteFood.Name = "btnDeleteFood";
+            this.btnDeleteFood.Size = new System.Drawing.Size(300, 100);
+            this.btnDeleteFood.TabIndex = 2;
+            this.btnDeleteFood.Text = "Delete Selected Food";
+            this.btnDeleteFood.UseVisualStyleBackColor = true;
+            this.btnDeleteFood.Click += new System.EventHandler(this.btnDeleteFood_Click);
+            // 
+            // btnUpdateFood
+            // 
+            this.btnUpdateFood.Location = new System.Drawing.Point(6, 53);
+            this.btnUpdateFood.Name = "btnUpdateFood";
+            this.btnUpdateFood.Size = new System.Drawing.Size(300, 100);
+            this.btnUpdateFood.TabIndex = 1;
+            this.btnUpdateFood.Text = "Update Selected Food";
+            this.btnUpdateFood.UseVisualStyleBackColor = true;
+            this.btnUpdateFood.Click += new System.EventHandler(this.btnUpdateFood_Click);
+            // 
             // dgvFoodItems
             // 
             this.dgvFoodItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -199,26 +219,6 @@
             this.btnMainMenu.Text = "Return to Main Menu";
             this.btnMainMenu.UseVisualStyleBackColor = true;
             this.btnMainMenu.Click += new System.EventHandler(this.btnMainMenu_Click);
-            // 
-            // btnUpdateFood
-            // 
-            this.btnUpdateFood.Location = new System.Drawing.Point(6, 53);
-            this.btnUpdateFood.Name = "btnUpdateFood";
-            this.btnUpdateFood.Size = new System.Drawing.Size(300, 100);
-            this.btnUpdateFood.TabIndex = 1;
-            this.btnUpdateFood.Text = "Update Food";
-            this.btnUpdateFood.UseVisualStyleBackColor = true;
-            this.btnUpdateFood.Click += new System.EventHandler(this.btnUpdateFood_Click);
-            // 
-            // btnDeleteFood
-            // 
-            this.btnDeleteFood.Location = new System.Drawing.Point(6, 160);
-            this.btnDeleteFood.Name = "btnDeleteFood";
-            this.btnDeleteFood.Size = new System.Drawing.Size(300, 100);
-            this.btnDeleteFood.TabIndex = 2;
-            this.btnDeleteFood.Text = "Delete Food";
-            this.btnDeleteFood.UseVisualStyleBackColor = true;
-            this.btnDeleteFood.Click += new System.EventHandler(this.btnDeleteFood_Click);
             // 
             // frmAddEditFood
             // 
