@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +15,19 @@ namespace BFT
 {
     public partial class frmAddEditFood : Form
     {
+        ///// Need to make sure this is updated to capture global account ID variable /////
+        private int _accountID = 1;
+        private string _connectionString;
+
         public frmAddEditFood()
         {
             InitializeComponent();
-            ///// Need to make sure this is updated to capture global account ID variable /////
-            LoadFoodItemData(1);
+            
+            // Load users logged foods
+            LoadFoodItemData(_accountID);
+
+            // Capture the connection string for the db
+            _connectionString = new DatabaseMethods().DBConnectionString();
         }
 
         ///// Code to verify input data conforms to proper types /////
@@ -62,7 +71,7 @@ namespace BFT
             else
             {
                 // Capture input values and transform to proper types
-                Object[] foodObject = new Object[] {1, // account id - 0
+                Object[] foodObject = new Object[] {_accountID, // account id - 0
                                                     tbFoodName.Text, // food - 1
                                                     decimal.Parse(tbCarbs.Text), // carbohydrates - 2
                                                     decimal.Parse(tbFats.Text), // fats - 3
@@ -72,7 +81,6 @@ namespace BFT
                 };
 
                 // Insert data into foods table
-                ///// Need to make sure this is updated to capture global account ID variable /////
                 InsertFoodItemData(foodObject);
 
                 // Reset add food fields
@@ -82,19 +90,15 @@ namespace BFT
                 tbProtein.Text = "";
 
                 // After table is written to, refresh food items data grid
-                ///// Need to make sure this is updated to capture global account ID variable /////
-                LoadFoodItemData(1);
+                LoadFoodItemData(_accountID);
             }
         }
 
         // Load current food items user has entered on form load or when food item added / edited
         private void LoadFoodItemData(int accountID)
         {
-            // New DatabaseMethod instance
-            DatabaseMethods db = new DatabaseMethods();
-
             // Setup connection
-            SqlConnection conn = new SqlConnection(db.DBConnectionString());
+            SqlConnection conn = new SqlConnection(_connectionString);
 
             // Setup SQL commands and query
             SqlCommand cmd = new SqlCommand
@@ -127,17 +131,13 @@ namespace BFT
             dgvFoodItems.Columns[0].ReadOnly = true;
             dgvFoodItems.Columns[5].ReadOnly = true;
             dgvFoodItems.Columns[6].ReadOnly = true;
-
         }
 
         // Load a new food item to the foods table
         private void InsertFoodItemData(Object[] foodObject)
         {
-            // New DatabaseMethod instance
-            DatabaseMethods db = new DatabaseMethods();
-
             // Setup connection
-            SqlConnection conn = new SqlConnection(db.DBConnectionString());
+            SqlConnection conn = new SqlConnection(_connectionString);
 
             // Setup SQL commands insert data
             SqlCommand cmd = new SqlCommand
@@ -184,8 +184,7 @@ namespace BFT
             }
 
             // After table is written to, refresh food items data grid
-            ///// Need to make sure this is updated to capture global account ID variable /////
-            LoadFoodItemData(1);
+            LoadFoodItemData(_accountID);
         }
 
         // Evaluate changes to a food in the database
@@ -193,7 +192,7 @@ namespace BFT
         {
             // Variables to capture values query returns
             // Extract values from query
-            string foodName = "a";
+            string foodName = "food";
             decimal carbs = 0.0M, proteins = 0.0M, fats = 0.0M;
 
             // New DatabaseMethod instance
@@ -255,11 +254,8 @@ namespace BFT
         // Update food in the database
         private void UpdateFood(object[] rowObject)
         {
-            // New DatabaseMethod instance
-            DatabaseMethods db = new DatabaseMethods();
-
             // Setup connection
-            SqlConnection conn = new SqlConnection(db.DBConnectionString());
+            SqlConnection conn = new SqlConnection(_connectionString);
 
             // Setup SQL commands insert data
             SqlCommand cmd = new SqlCommand
@@ -298,11 +294,8 @@ namespace BFT
             // Capture food id row
             int foodID = Convert.ToInt32(row.Cells[0].Value);
 
-            // New DatabaseMethod instance
-            DatabaseMethods db = new DatabaseMethods();
-
             // Setup connection
-            SqlConnection conn = new SqlConnection(db.DBConnectionString());
+            SqlConnection conn = new SqlConnection(_connectionString);
 
             // Setup SQL commands insert data
             SqlCommand cmd = new SqlCommand
@@ -323,8 +316,7 @@ namespace BFT
             conn.Close();
 
             // After the record is soft deleted, refresh food items data grid
-            ///// Need to make sure this is updated to capture global account ID variable /////
-            LoadFoodItemData(1);
+            LoadFoodItemData(_accountID);
         }
 
         private void btnMainMenu_Click(object sender, EventArgs e)
