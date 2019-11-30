@@ -19,7 +19,7 @@ namespace BFT
         public frmMainScreen()
         {
             InitializeComponent();
-
+            _accountID = BFT.LoggedInUser.account_id;
             _connectionString = new DatabaseMethods().DBConnectionString();
         }
 

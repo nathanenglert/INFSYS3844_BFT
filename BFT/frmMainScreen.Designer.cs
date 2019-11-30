@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblWelcomeText = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -43,13 +43,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblDailyCalories = new System.Windows.Forms.Label();
             this.dgvFoodLog = new System.Windows.Forms.DataGridView();
-            this.chartFoodLog = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.calories = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.carbohydrates = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fats = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.proteins = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.created_at = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chartFoodLog = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoodLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartFoodLog)).BeginInit();
@@ -146,52 +146,6 @@
             this.dgvFoodLog.Size = new System.Drawing.Size(566, 373);
             this.dgvFoodLog.TabIndex = 7;
             // 
-            // chartFoodLog
-            // 
-            chartArea9.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
-            chartArea9.AxisX.MajorGrid.LineColor = System.Drawing.Color.Transparent;
-            chartArea9.AxisX2.MajorGrid.LineColor = System.Drawing.Color.Transparent;
-            chartArea9.AxisX2.Maximum = 2000D;
-            chartArea9.AxisY.MajorGrid.LineColor = System.Drawing.Color.Transparent;
-            chartArea9.AxisY2.MajorGrid.LineColor = System.Drawing.Color.Transparent;
-            chartArea9.Name = "ChartArea1";
-            this.chartFoodLog.ChartAreas.Add(chartArea9);
-            legend9.Name = "Legend1";
-            this.chartFoodLog.Legends.Add(legend9);
-            this.chartFoodLog.Location = new System.Drawing.Point(16, 42);
-            this.chartFoodLog.Name = "chartFoodLog";
-            series33.ChartArea = "ChartArea1";
-            series33.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series33.Legend = "Legend1";
-            series33.Name = "Calories";
-            series33.XValueMember = "created_at";
-            series33.YValueMembers = "calories";
-            series34.ChartArea = "ChartArea1";
-            series34.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series34.Legend = "Legend1";
-            series34.Name = "Carbs";
-            series34.XValueMember = "created_at";
-            series34.YValueMembers = "carbohydrates";
-            series35.ChartArea = "ChartArea1";
-            series35.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series35.Legend = "Legend1";
-            series35.Name = "Fats";
-            series35.XValueMember = "created_at";
-            series35.YValueMembers = "fats";
-            series36.ChartArea = "ChartArea1";
-            series36.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series36.Legend = "Legend1";
-            series36.Name = "Proteins";
-            series36.XValueMember = "proteins";
-            series36.YValueMembers = "created_at";
-            this.chartFoodLog.Series.Add(series33);
-            this.chartFoodLog.Series.Add(series34);
-            this.chartFoodLog.Series.Add(series35);
-            this.chartFoodLog.Series.Add(series36);
-            this.chartFoodLog.Size = new System.Drawing.Size(566, 193);
-            this.chartFoodLog.TabIndex = 8;
-            this.chartFoodLog.Text = "chart1";
-            // 
             // name
             // 
             this.name.DataPropertyName = "name";
@@ -233,6 +187,52 @@
             this.created_at.HeaderText = "Date";
             this.created_at.Name = "created_at";
             this.created_at.ReadOnly = true;
+            // 
+            // chartFoodLog
+            // 
+            chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Transparent;
+            chartArea1.AxisX2.MajorGrid.LineColor = System.Drawing.Color.Transparent;
+            chartArea1.AxisX2.Maximum = 2000D;
+            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Transparent;
+            chartArea1.AxisY2.MajorGrid.LineColor = System.Drawing.Color.Transparent;
+            chartArea1.Name = "ChartArea1";
+            this.chartFoodLog.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartFoodLog.Legends.Add(legend1);
+            this.chartFoodLog.Location = new System.Drawing.Point(16, 42);
+            this.chartFoodLog.Name = "chartFoodLog";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Calories";
+            series1.XValueMember = "created_at";
+            series1.YValueMembers = "calories";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Carbs";
+            series2.XValueMember = "created_at";
+            series2.YValueMembers = "carbohydrates";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "Fats";
+            series3.XValueMember = "created_at";
+            series3.YValueMembers = "fats";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Legend = "Legend1";
+            series4.Name = "Proteins";
+            series4.XValueMember = "proteins";
+            series4.YValueMembers = "created_at";
+            this.chartFoodLog.Series.Add(series1);
+            this.chartFoodLog.Series.Add(series2);
+            this.chartFoodLog.Series.Add(series3);
+            this.chartFoodLog.Series.Add(series4);
+            this.chartFoodLog.Size = new System.Drawing.Size(566, 193);
+            this.chartFoodLog.TabIndex = 8;
+            this.chartFoodLog.Text = "chart1";
             // 
             // frmMainScreen
             // 

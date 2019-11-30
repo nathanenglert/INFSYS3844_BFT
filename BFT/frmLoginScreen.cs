@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using BFT;
 
 namespace BFT
 {
@@ -18,36 +19,58 @@ namespace BFT
             InitializeComponent();
         }
 
-        // Test to make sure DB connection works - Success
-        //private void QueryUsersTable()
-        //{
-        //    // Setup connection
-        //    SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\BFT_DB.mdf;Integrated Security=True");
+        private void label1_Click(object sender, EventArgs e)
+        {
 
-        //    // Setup SQL commands to check if user already exists
-        //    SqlCommand cmd = new SqlCommand
-        //    {
-        //        CommandType = CommandType.Text,
-        //        CommandText = "SELECT * from accounts",
-        //        Connection = conn
-        //    };
-        //    SqlDataReader reader;
+        }
 
-        //    // Open connection
-        //    conn.Open();
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Call Login function.
+            bool success = loginUser(username_box.Text, pw_box.Text);
+            if (!success)
+            {
+                pw_box.Clear();
+                MessageBox.Show("Invalid user email or password, please try again.");
+            }
+            else {
+                this.Hide();
+                frmMainScreen main_screen = new frmMainScreen();
+                main_screen.Show();
+            }
+        }
 
-        //    // Query users table
-        //    reader = cmd.ExecuteReader();
+        // Login in user if email and password valid. Otherwise raise exeption.
+        private bool loginUser(string email, string password)
+        {
+            // Setup connection
+            SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\BFT_DB.mdf;Integrated Security=True");
 
-        //    // Loop over and print results
-        //    int count = reader.FieldCount;
-        //    while (reader.Read())
-        //    {
-        //        for (int i = 0; i < count; i++)
-        //        {
-        //            Console.WriteLine(reader.GetValue(i));
-        //        }
-        //    }
-        //}
+            // Setup SQL commands to check if user already exists
+            SqlCommand cmd = new SqlCommand
+            {
+                CommandType = CommandType.Text,
+                CommandText = $"SELECT * from accounts where email = {email} AND password = {password}",
+                Connection = conn
+            };
+            SqlDataReader reader;
+
+            // Open connection
+            conn.Open();
+
+            // Query users table
+            reader = cmd.ExecuteReader();
+
+            // Loop over and print results
+            if (!reader.HasRows) {
+                return false;
+            }
+            if (reader.Read())
+            {
+                BFT.LoggedInUser.user_email = Convert.ToString(reader["email"]);
+                BFT.LoggedInUser.account_id = Convert.ToInt32(reader["id"]);
+            }
+            return true;
+        }
     }
 }
