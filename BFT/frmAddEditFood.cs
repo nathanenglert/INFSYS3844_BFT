@@ -124,7 +124,7 @@ namespace BFT
                 // Fill dataset with query results
                 dAdapter.Fill(ds);
 
-
+                // Update data grid items to only allow edits to certain columns
                 dgvFoodItems.DataSource = ds.Tables[0];
                 dgvFoodItems.ReadOnly = false;
                 dgvFoodItems.Columns[0].ReadOnly = true;
@@ -325,6 +325,15 @@ namespace BFT
         {
             Program._runProgram = false;
             Application.Exit();
+        }
+
+        private void frmAddEditFood_Closing(object sender, EventArgs e)
+        {
+            if (this.DialogResult == DialogResult.Cancel)
+            {
+                Program._runProgram = false;
+                Application.Exit();
+            }
         }
     }
 }

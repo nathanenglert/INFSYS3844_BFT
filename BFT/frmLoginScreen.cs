@@ -26,12 +26,12 @@ namespace BFT
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            // Authenticate the user - If valid open main screen
+            // Authenticate the user - If valid open main screen from Program.cs
             bool success = LoginUser(tbEmail.Text, tbPassword.Text);
             if (!success)
             {
                 tbPassword.Clear();
-                MessageBox.Show("Invalid user email or password, please try again.");
+                MessageBox.Show("Invalid email or password, please try again.");
             }
             else
             {
@@ -84,6 +84,15 @@ namespace BFT
         {
             Program._runProgram = false;
             Application.Exit();
+        }
+
+        private void frmLoginScreen_Closing(object sender, EventArgs e)
+        {
+            if (this.DialogResult == DialogResult.Cancel)
+            {
+                Program._runProgram = false;
+                Application.Exit();
+            }
         }
     }
 }

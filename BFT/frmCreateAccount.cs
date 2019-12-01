@@ -50,7 +50,6 @@ namespace BFT
                 else
                 {
                     MessageBox.Show("Email already exists. Create new account or login.");
-                    this.Close();
                 }
             }
         }
@@ -122,6 +121,15 @@ namespace BFT
         {
             Program._runProgram = false;
             Application.Exit();
+        }
+
+        private void frmCreateAccount_Closing(object sender, EventArgs e)
+        {
+            if (this.DialogResult == DialogResult.Cancel)
+            {
+                Program._runProgram = false;
+                Application.Exit();
+            }
         }
     }
 }

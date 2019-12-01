@@ -51,6 +51,7 @@
             this.proteins = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.created_at = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chartFoodLog = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btnDeleteMeal = new System.Windows.Forms.Button();
             this.pnlDailyCals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoodLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartFoodLog)).BeginInit();
@@ -70,7 +71,7 @@
             // btnManageFood
             // 
             this.btnManageFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManageFood.Location = new System.Drawing.Point(1657, 856);
+            this.btnManageFood.Location = new System.Drawing.Point(1657, 744);
             this.btnManageFood.Margin = new System.Windows.Forms.Padding(6);
             this.btnManageFood.Name = "btnManageFood";
             this.btnManageFood.Size = new System.Drawing.Size(300, 100);
@@ -82,7 +83,7 @@
             // btnLogFood
             // 
             this.btnLogFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogFood.Location = new System.Drawing.Point(1657, 744);
+            this.btnLogFood.Location = new System.Drawing.Point(1657, 632);
             this.btnLogFood.Margin = new System.Windows.Forms.Padding(6);
             this.btnLogFood.Name = "btnLogFood";
             this.btnLogFood.Size = new System.Drawing.Size(300, 100);
@@ -263,6 +264,18 @@
             this.chartFoodLog.TabIndex = 8;
             this.chartFoodLog.Text = "chart1";
             // 
+            // btnDeleteMeal
+            // 
+            this.btnDeleteMeal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteMeal.Location = new System.Drawing.Point(1657, 856);
+            this.btnDeleteMeal.Margin = new System.Windows.Forms.Padding(6);
+            this.btnDeleteMeal.Name = "btnDeleteMeal";
+            this.btnDeleteMeal.Size = new System.Drawing.Size(300, 100);
+            this.btnDeleteMeal.TabIndex = 9;
+            this.btnDeleteMeal.Text = "Delete Selected Meal";
+            this.btnDeleteMeal.UseVisualStyleBackColor = true;
+            this.btnDeleteMeal.Click += new System.EventHandler(this.btnDeleteMeal_Click);
+            // 
             // frmMainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -271,6 +284,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1974, 1229);
+            this.Controls.Add(this.btnDeleteMeal);
             this.Controls.Add(this.chartFoodLog);
             this.Controls.Add(this.dgvFoodLog);
             this.Controls.Add(this.pnlDailyCals);
@@ -283,6 +297,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "frmMainScreen";
             this.Text = "frmMainScreen";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMainScreen_Closing);
             this.Load += new System.EventHandler(this.frmMainScreen_Load);
             this.pnlDailyCals.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoodLog)).EndInit();
@@ -293,7 +308,6 @@
         }
 
         #endregion
-
         private System.Windows.Forms.Label lblWelcomeText;
         private System.Windows.Forms.Button btnManageFood;
         private System.Windows.Forms.Button btnLogFood;
@@ -310,5 +324,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fats;
         private System.Windows.Forms.DataGridViewTextBoxColumn proteins;
         private System.Windows.Forms.DataGridViewTextBoxColumn created_at;
+        private System.Windows.Forms.Button btnDeleteMeal;
     }
 }

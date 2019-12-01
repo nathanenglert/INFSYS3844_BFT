@@ -24,17 +24,21 @@ namespace BFT
             _connectionString = new DatabaseMethods().DBConnectionString();
         }
 
-        private void frmMainScreen_Load(object sender, EventArgs e)
+        public void frmMainScreen_Load(object sender, EventArgs e)
         {
             // Welcome message
             lblWelcomeText.Text = $"Hello {Program._firstName}!";
 
             var log = GetFoodLog();
-            var summary = GetFoodSummary();            
+            var summary = GetFoodSummary();
 
-            RenderFoodLog(log);
-            RenderFoodSummary(summary);
-            RenderTotals(summary);
+            // Render if fields contain data
+            if (log.Tables[0].Rows.Count !=0)
+            {
+                RenderFoodLog(log);
+                RenderFoodSummary(summary);
+                RenderTotals(summary);
+            }
         }
 
         private void RenderFoodSummary(DataSet summary)
@@ -69,7 +73,6 @@ namespace BFT
 
         private void RenderTotals(DataSet summary)
         {
-            ///// This has an issue if user does not have data - Need to resolve /////
             var numberOfRows = summary.Tables[0].Rows.Count;
             var lastRow = summary.Tables[0].Rows[numberOfRows - 1];
             var totalCalories = lastRow["calories"];
@@ -147,6 +150,11 @@ namespace BFT
             frmAddEditFood.Show();
         }
 
+        private void btnDeleteMeal_Click(object sender, EventArgs e)
+        {
+            ///// Needs work to delete a meal /////
+        }
+
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -156,6 +164,15 @@ namespace BFT
         {
             Program._runProgram = false;
             Application.Exit();
+        }
+
+        private void frmMainScreen_Closing(object sender, EventArgs e)
+        {
+            if (this.DialogResult == DialogResult.Cancel)
+            {
+                Program._runProgram = false;
+                Application.Exit();
+            }
         }
     }
 }

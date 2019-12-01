@@ -242,11 +242,10 @@
             this.gbEditFoodItems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoodItems)).EndInit();
             this.ResumeLayout(false);
-
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAddEditFood_Closing);
         }
 
         #endregion
-
         private System.Windows.Forms.GroupBox gbAddFoodItem;
         private System.Windows.Forms.GroupBox gbEditFoodItems;
         private System.Windows.Forms.Button btnExit;

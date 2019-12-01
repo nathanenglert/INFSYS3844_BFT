@@ -172,11 +172,10 @@
             this.Text = "Create New Account";
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCreateAccount_Closing);
         }
 
         #endregion
-
         private System.Windows.Forms.Label lblFirstName;
         private System.Windows.Forms.TextBox tbFirstName;
         private System.Windows.Forms.TextBox tbLastName;

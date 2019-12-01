@@ -136,11 +136,10 @@
             this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLoginScreen_Closing);
         }
 
         #endregion
-
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Button btnLogin;
