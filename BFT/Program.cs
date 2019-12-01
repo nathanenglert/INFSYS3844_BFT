@@ -8,6 +8,11 @@ namespace BFT
 {
     static class Program
     {
+        // Variables to carry through the program
+        public static bool _runProgram = true;
+        public static int _accountID = -1;
+        public static string _firstName = " ";
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,8 +21,18 @@ namespace BFT
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new frmLoginScreen());
-            Application.Run(new frmAddEditFood());
+
+            // Loop will run until use hits any exit button
+            // Ensure login to multiple accounts without exiting program completely
+            while (_runProgram)
+            {
+                Application.Run(new frmLoginScreen());
+
+                if (_accountID != -1)
+                {
+                    Application.Run(new frmMainScreen());
+                }
+            }
         }
     }
 }

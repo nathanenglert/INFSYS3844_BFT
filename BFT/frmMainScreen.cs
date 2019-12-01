@@ -13,24 +13,21 @@ namespace BFT
 {
     public partial class frmMainScreen : Form
     {
-        private int _accountID = 1;
+        // Create conenction string variable for later use
         private string _connectionString;
 
         public frmMainScreen()
         {
             InitializeComponent();
-            _accountID = BFT.LoggedInUser.account_id;
+
+            // Get connection string
             _connectionString = new DatabaseMethods().DBConnectionString();
         }
 
         private void frmMainScreen_Load(object sender, EventArgs e)
         {
-            var account = GetAccountDetails();
-
-            // Confirm that the account exists before continuing
-            if (string.IsNullOrEmpty(account)) return;
-
-            lblWelcomeText.Text = $"Hello {account}!";
+            // Welcome message
+            lblWelcomeText.Text = $"Hello {Program._firstName}!";
 
             var log = GetFoodLog();
             var summary = GetFoodSummary();            
@@ -72,30 +69,12 @@ namespace BFT
 
         private void RenderTotals(DataSet summary)
         {
+            ///// This has an issue if user does not have data - Need to resolve /////
             var numberOfRows = summary.Tables[0].Rows.Count;
             var lastRow = summary.Tables[0].Rows[numberOfRows - 1];
             var totalCalories = lastRow["calories"];
 
             lblDailyCalories.Text = string.Format("{0:0}", totalCalories);
-        }
-
-        private string GetAccountDetails()
-        {
-            using (var conn = new SqlConnection(_connectionString))
-            {
-                var cmd = new SqlCommand
-                {
-                    CommandType = CommandType.Text,
-                    CommandText = @"SELECT a.first_name
-                                    FROM dbo.accounts a
-                                    WHERE a.id = " + _accountID,
-                    Connection = conn
-                };
-
-                conn.Open();
-
-                return cmd.ExecuteScalar() as string;
-            }
         }
 
         private DataSet GetFoodSummary()
@@ -112,7 +91,7 @@ namespace BFT
                                          , cast(fl.created_at as DateTime) as created_at
                                     FROM dbo.food_log fl
                                     JOIN dbo.foods f ON f.id = fl.food_id
-                                    WHERE fl.account_id = " + _accountID + @"
+                                    WHERE fl.account_id = " + Program._accountID + @"
                                     GROUP BY fl.created_at
                                     ORDER BY fl.created_at ASC",
                     Connection = conn
@@ -142,7 +121,7 @@ namespace BFT
                                          , cast(fl.created_at as DateTime) as created_at
                                     FROM dbo.food_log fl
                                     JOIN dbo.foods f ON f.id = fl.food_id
-                                    WHERE fl.account_id = " + _accountID + @"
+                                    WHERE fl.account_id = " + Program._accountID + @"
                                     ORDER BY fl.created_at DESC",
                     Connection = conn
                 };
@@ -154,6 +133,29 @@ namespace BFT
 
                 return dataset;
             }
+        }
+
+        private void btnLogFood_Click(object sender, EventArgs e)
+        {
+            frmLogFood frmLogFood = new frmLogFood();
+            frmLogFood.Show();
+        }
+
+        private void btnManageFood_Click(object sender, EventArgs e)
+        {
+            frmAddEditFood frmAddEditFood = new frmAddEditFood();
+            frmAddEditFood.Show();
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Program._runProgram = false;
+            Application.Exit();
         }
     }
 }

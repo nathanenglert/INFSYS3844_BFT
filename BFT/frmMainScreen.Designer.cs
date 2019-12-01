@@ -34,13 +34,14 @@
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainScreen));
             this.lblWelcomeText = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnManageFood = new System.Windows.Forms.Button();
+            this.btnLogFood = new System.Windows.Forms.Button();
+            this.btnLogOut = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.lblDailyCals = new System.Windows.Forms.Label();
+            this.pnlDailyCals = new System.Windows.Forms.Panel();
             this.lblDailyCalories = new System.Windows.Forms.Label();
             this.dgvFoodLog = new System.Windows.Forms.DataGridView();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,7 +51,7 @@
             this.proteins = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.created_at = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chartFoodLog = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.panel1.SuspendLayout();
+            this.pnlDailyCals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoodLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartFoodLog)).BeginInit();
             this.SuspendLayout();
@@ -59,72 +60,89 @@
             // 
             this.lblWelcomeText.AutoSize = true;
             this.lblWelcomeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcomeText.Location = new System.Drawing.Point(12, 9);
+            this.lblWelcomeText.Location = new System.Drawing.Point(24, 17);
+            this.lblWelcomeText.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblWelcomeText.Name = "lblWelcomeText";
-            this.lblWelcomeText.Size = new System.Drawing.Size(107, 20);
+            this.lblWelcomeText.Size = new System.Drawing.Size(220, 37);
             this.lblWelcomeText.TabIndex = 0;
             this.lblWelcomeText.Text = "Hello, [Name]!";
             // 
-            // button1
+            // btnManageFood
             // 
-            this.button1.Location = new System.Drawing.Point(588, 533);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(151, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Manage";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnManageFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManageFood.Location = new System.Drawing.Point(1657, 856);
+            this.btnManageFood.Margin = new System.Windows.Forms.Padding(6);
+            this.btnManageFood.Name = "btnManageFood";
+            this.btnManageFood.Size = new System.Drawing.Size(300, 100);
+            this.btnManageFood.TabIndex = 1;
+            this.btnManageFood.Text = "Manage Food";
+            this.btnManageFood.UseVisualStyleBackColor = true;
+            this.btnManageFood.Click += new System.EventHandler(this.btnManageFood_Click);
             // 
-            // button2
+            // btnLogFood
             // 
-            this.button2.Location = new System.Drawing.Point(588, 504);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(151, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Track";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnLogFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogFood.Location = new System.Drawing.Point(1657, 744);
+            this.btnLogFood.Margin = new System.Windows.Forms.Padding(6);
+            this.btnLogFood.Name = "btnLogFood";
+            this.btnLogFood.Size = new System.Drawing.Size(300, 100);
+            this.btnLogFood.TabIndex = 2;
+            this.btnLogFood.Text = "Log Food";
+            this.btnLogFood.UseVisualStyleBackColor = true;
+            this.btnLogFood.Click += new System.EventHandler(this.btnLogFood_Click);
             // 
-            // button3
+            // btnLogOut
             // 
-            this.button3.Location = new System.Drawing.Point(588, 562);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(151, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Log Out";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogOut.Location = new System.Drawing.Point(1657, 968);
+            this.btnLogOut.Margin = new System.Windows.Forms.Padding(6);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(300, 100);
+            this.btnLogOut.TabIndex = 3;
+            this.btnLogOut.Text = "Log Out";
+            this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
-            // button4
+            // btnExit
             // 
-            this.button4.Location = new System.Drawing.Point(588, 591);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(151, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Quit";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Location = new System.Drawing.Point(1657, 1080);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(6);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(300, 100);
+            this.btnExit.TabIndex = 4;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // label1
+            // lblDailyCals
             // 
-            this.label1.Location = new System.Drawing.Point(3, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 23);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Daily Calories";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblDailyCals.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDailyCals.Location = new System.Drawing.Point(6, 35);
+            this.lblDailyCals.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblDailyCals.Name = "lblDailyCals";
+            this.lblDailyCals.Size = new System.Drawing.Size(290, 44);
+            this.lblDailyCals.TabIndex = 5;
+            this.lblDailyCals.Text = "Daily Calories";
+            this.lblDailyCals.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // panel1
+            // pnlDailyCals
             // 
-            this.panel1.Controls.Add(this.lblDailyCalories);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(588, 72);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(151, 100);
-            this.panel1.TabIndex = 6;
+            this.pnlDailyCals.Controls.Add(this.lblDailyCalories);
+            this.pnlDailyCals.Controls.Add(this.lblDailyCals);
+            this.pnlDailyCals.Location = new System.Drawing.Point(1657, 81);
+            this.pnlDailyCals.Margin = new System.Windows.Forms.Padding(6);
+            this.pnlDailyCals.Name = "pnlDailyCals";
+            this.pnlDailyCals.Size = new System.Drawing.Size(300, 200);
+            this.pnlDailyCals.TabIndex = 6;
             // 
             // lblDailyCalories
             // 
             this.lblDailyCalories.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDailyCalories.Location = new System.Drawing.Point(3, 49);
+            this.lblDailyCalories.Location = new System.Drawing.Point(6, 86);
+            this.lblDailyCalories.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblDailyCalories.Name = "lblDailyCalories";
-            this.lblDailyCalories.Size = new System.Drawing.Size(145, 51);
+            this.lblDailyCalories.Size = new System.Drawing.Size(290, 98);
             this.lblDailyCalories.TabIndex = 6;
             this.lblDailyCalories.Text = "0";
             this.lblDailyCalories.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -132,6 +150,8 @@
             // dgvFoodLog
             // 
             this.dgvFoodLog.AllowUserToAddRows = false;
+            this.dgvFoodLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvFoodLog.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvFoodLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFoodLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.name,
@@ -140,16 +160,19 @@
             this.fats,
             this.proteins,
             this.created_at});
-            this.dgvFoodLog.Location = new System.Drawing.Point(16, 241);
+            this.dgvFoodLog.Location = new System.Drawing.Point(32, 463);
+            this.dgvFoodLog.Margin = new System.Windows.Forms.Padding(6);
             this.dgvFoodLog.Name = "dgvFoodLog";
             this.dgvFoodLog.ReadOnly = true;
-            this.dgvFoodLog.Size = new System.Drawing.Size(566, 373);
+            this.dgvFoodLog.RowHeadersWidth = 82;
+            this.dgvFoodLog.Size = new System.Drawing.Size(1613, 717);
             this.dgvFoodLog.TabIndex = 7;
             // 
             // name
             // 
             this.name.DataPropertyName = "name";
             this.name.HeaderText = "Name";
+            this.name.MinimumWidth = 10;
             this.name.Name = "name";
             this.name.ReadOnly = true;
             // 
@@ -157,6 +180,7 @@
             // 
             this.calories.DataPropertyName = "calories";
             this.calories.HeaderText = "Calories";
+            this.calories.MinimumWidth = 10;
             this.calories.Name = "calories";
             this.calories.ReadOnly = true;
             // 
@@ -164,6 +188,7 @@
             // 
             this.carbohydrates.DataPropertyName = "carbohydrates";
             this.carbohydrates.HeaderText = "Carbs";
+            this.carbohydrates.MinimumWidth = 10;
             this.carbohydrates.Name = "carbohydrates";
             this.carbohydrates.ReadOnly = true;
             // 
@@ -171,6 +196,7 @@
             // 
             this.fats.DataPropertyName = "fats";
             this.fats.HeaderText = "Fats";
+            this.fats.MinimumWidth = 10;
             this.fats.Name = "fats";
             this.fats.ReadOnly = true;
             // 
@@ -178,6 +204,7 @@
             // 
             this.proteins.DataPropertyName = "proteins";
             this.proteins.HeaderText = "Proteins";
+            this.proteins.MinimumWidth = 10;
             this.proteins.Name = "proteins";
             this.proteins.ReadOnly = true;
             // 
@@ -185,6 +212,7 @@
             // 
             this.created_at.DataPropertyName = "created_at";
             this.created_at.HeaderText = "Date";
+            this.created_at.MinimumWidth = 10;
             this.created_at.Name = "created_at";
             this.created_at.ReadOnly = true;
             // 
@@ -200,7 +228,8 @@
             this.chartFoodLog.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chartFoodLog.Legends.Add(legend1);
-            this.chartFoodLog.Location = new System.Drawing.Point(16, 42);
+            this.chartFoodLog.Location = new System.Drawing.Point(32, 81);
+            this.chartFoodLog.Margin = new System.Windows.Forms.Padding(6);
             this.chartFoodLog.Name = "chartFoodLog";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
@@ -230,27 +259,32 @@
             this.chartFoodLog.Series.Add(series2);
             this.chartFoodLog.Series.Add(series3);
             this.chartFoodLog.Series.Add(series4);
-            this.chartFoodLog.Size = new System.Drawing.Size(566, 193);
+            this.chartFoodLog.Size = new System.Drawing.Size(1613, 371);
             this.chartFoodLog.TabIndex = 8;
             this.chartFoodLog.Text = "chart1";
             // 
             // frmMainScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(751, 626);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScroll = true;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1974, 1229);
             this.Controls.Add(this.chartFoodLog);
             this.Controls.Add(this.dgvFoodLog);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.pnlDailyCals);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.btnLogOut);
+            this.Controls.Add(this.btnLogFood);
+            this.Controls.Add(this.btnManageFood);
             this.Controls.Add(this.lblWelcomeText);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "frmMainScreen";
             this.Text = "frmMainScreen";
             this.Load += new System.EventHandler(this.frmMainScreen_Load);
-            this.panel1.ResumeLayout(false);
+            this.pnlDailyCals.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoodLog)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartFoodLog)).EndInit();
             this.ResumeLayout(false);
@@ -261,12 +295,12 @@
         #endregion
 
         private System.Windows.Forms.Label lblWelcomeText;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnManageFood;
+        private System.Windows.Forms.Button btnLogFood;
+        private System.Windows.Forms.Button btnLogOut;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Label lblDailyCals;
+        private System.Windows.Forms.Panel pnlDailyCals;
         private System.Windows.Forms.Label lblDailyCalories;
         private System.Windows.Forms.DataGridView dgvFoodLog;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartFoodLog;

@@ -8,69 +8,82 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using BFT;
 
 namespace BFT
 {
     public partial class frmLoginScreen : Form
     {
+        // Create conenction string variable
+        private string _connectionString;
+
         public frmLoginScreen()
         {
             InitializeComponent();
+
+            // Get connection string
+            _connectionString = new DatabaseMethods().DBConnectionString();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // Call Login function.
-            bool success = loginUser(username_box.Text, pw_box.Text);
+            // Authenticate the user - If valid open main screen
+            bool success = LoginUser(tbEmail.Text, tbPassword.Text);
             if (!success)
             {
-                pw_box.Clear();
+                tbPassword.Clear();
                 MessageBox.Show("Invalid user email or password, please try again.");
             }
-            else {
-                this.Hide();
-                frmMainScreen main_screen = new frmMainScreen();
-                main_screen.Show();
+            else
+            {
+                this.Close();
             }
         }
 
-        // Login in user if email and password valid. Otherwise raise exeption.
-        private bool loginUser(string email, string password)
+        // Login in user if email and password valid
+        private bool LoginUser(string email, string password)
         {
-            // Setup connection
-            SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\BFT_DB.mdf;Integrated Security=True");
-
-            // Setup SQL commands to check if user already exists
-            SqlCommand cmd = new SqlCommand
+            using (var conn = new SqlConnection(_connectionString))
             {
-                CommandType = CommandType.Text,
-                CommandText = $"SELECT * from accounts where email = {email} AND password = {password}",
-                Connection = conn
-            };
-            SqlDataReader reader;
+                // Setup SQL commands to check if user already exists
+                SqlCommand cmd = new SqlCommand
+                {
+                    CommandType = CommandType.Text,
+                    CommandText = $"SELECT id, first_name, email, password from accounts where email = '{email}' AND password = '{password}'",
+                    Connection = conn
+                };
+                SqlDataReader reader;
 
-            // Open connection
-            conn.Open();
+                // Open connection
+                conn.Open();
 
-            // Query users table
-            reader = cmd.ExecuteReader();
+                // Query users table
+                reader = cmd.ExecuteReader();
 
-            // Loop over and print results
-            if (!reader.HasRows) {
-                return false;
-            }
-            if (reader.Read())
-            {
-                BFT.LoggedInUser.user_email = Convert.ToString(reader["email"]);
-                BFT.LoggedInUser.account_id = Convert.ToInt32(reader["id"]);
-            }
-            return true;
+                // Loop over and print results
+                if (!reader.HasRows)
+                {
+                    return false;
+                }
+                if (reader.Read())
+                {
+                    Program._accountID = Convert.ToInt32(reader["id"]);
+                    Program._firstName = Convert.ToString(reader["first_name"]);
+                }
+                return true;
+            }            
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            // Launch create account screen if new user
+            frmCreateAccount frmCreateAccount = new frmCreateAccount();
+            frmCreateAccount.Show();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Program._runProgram = false;
+            Application.Exit();
         }
     }
 }

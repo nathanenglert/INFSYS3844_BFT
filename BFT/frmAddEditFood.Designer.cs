@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddEditFood));
             this.gbAddFoodItem = new System.Windows.Forms.GroupBox();
             this.tbFoodName = new System.Windows.Forms.TextBox();
             this.tbFats = new System.Windows.Forms.TextBox();
@@ -233,6 +234,7 @@
             this.Controls.Add(this.dgvFoodItems);
             this.Controls.Add(this.gbEditFoodItems);
             this.Controls.Add(this.gbAddFoodItem);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmAddEditFood";
             this.Text = "Manage Food Items";
             this.gbAddFoodItem.ResumeLayout(false);

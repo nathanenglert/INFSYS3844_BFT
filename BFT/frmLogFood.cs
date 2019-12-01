@@ -12,6 +12,9 @@ namespace BFT
 {
     public partial class frmLogFood : Form
     {
+        // Create conenction string variable for later use
+        private string _connectionString;
+
         public frmLogFood()
         {
             InitializeComponent();

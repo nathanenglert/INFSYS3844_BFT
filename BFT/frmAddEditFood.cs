@@ -15,19 +15,18 @@ namespace BFT
 {
     public partial class frmAddEditFood : Form
     {
-        ///// Need to make sure this is updated to capture global account ID variable /////
-        private int _accountID = 1;
+        // Create conenction string variable for later use
         private string _connectionString;
 
         public frmAddEditFood()
         {
             InitializeComponent();
-            
-            // Load users logged foods
-            LoadFoodItemData(_accountID);
 
             // Capture the connection string for the db
             _connectionString = new DatabaseMethods().DBConnectionString();
+
+            // Load users logged foods
+            LoadFoodItemData(Program._accountID);
         }
 
         ///// Code to verify input data conforms to proper types /////
@@ -71,7 +70,7 @@ namespace BFT
             else
             {
                 // Capture input values and transform to proper types
-                Object[] foodObject = new Object[] {_accountID, // account id - 0
+                Object[] foodObject = new Object[] {Program._accountID, // account id - 0
                                                     tbFoodName.Text, // food - 1
                                                     decimal.Parse(tbCarbs.Text), // carbohydrates - 2
                                                     decimal.Parse(tbFats.Text), // fats - 3
@@ -90,21 +89,20 @@ namespace BFT
                 tbProtein.Text = "";
 
                 // After table is written to, refresh food items data grid
-                LoadFoodItemData(_accountID);
+                LoadFoodItemData(Program._accountID);
             }
         }
 
         // Load current food items user has entered on form load or when food item added / edited
         private void LoadFoodItemData(int accountID)
         {
-            // Setup connection
-            SqlConnection conn = new SqlConnection(_connectionString);
-
-            // Setup SQL commands and query
-            SqlCommand cmd = new SqlCommand
+            using (var conn = new SqlConnection(_connectionString))
             {
-                CommandType = CommandType.Text,
-                CommandText = @"SELECT
+                // Setup SQL commands and query
+                SqlCommand cmd = new SqlCommand
+                {
+                    CommandType = CommandType.Text,
+                    CommandText = @"SELECT
                                 id AS ID
                                 ,name AS Name
                                 ,carbohydrates AS Carbohydrates
@@ -116,48 +114,50 @@ namespace BFT
                                 WHERE
                                 deleted_at IS NULL
                                 AND added_by_account_id = " + accountID,
-                Connection = conn
-            };
-            SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+                    Connection = conn
+                };
+                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
 
-            // Define dataset
-            DataSet ds = new DataSet();
+                // Define dataset
+                DataSet ds = new DataSet();
 
-            // Fill dataset with query results
-            dAdapter.Fill(ds);
+                // Fill dataset with query results
+                dAdapter.Fill(ds);
 
-            dgvFoodItems.DataSource = ds.Tables[0];
-            dgvFoodItems.ReadOnly = false;
-            dgvFoodItems.Columns[0].ReadOnly = true;
-            dgvFoodItems.Columns[5].ReadOnly = true;
-            dgvFoodItems.Columns[6].ReadOnly = true;
+
+                dgvFoodItems.DataSource = ds.Tables[0];
+                dgvFoodItems.ReadOnly = false;
+                dgvFoodItems.Columns[0].ReadOnly = true;
+                dgvFoodItems.Columns[5].ReadOnly = true;
+                dgvFoodItems.Columns[6].ReadOnly = true;
+            }
         }
 
         // Load a new food item to the foods table
         private void InsertFoodItemData(Object[] foodObject)
         {
-            // Setup connection
-            SqlConnection conn = new SqlConnection(_connectionString);
-
-            // Setup SQL commands insert data
-            SqlCommand cmd = new SqlCommand
+            using (var conn = new SqlConnection(_connectionString))
             {
-                CommandType = CommandType.Text,
-                CommandText = @"INSERT INTO foods (name, carbohydrates, proteins, fats, calories, added_by_account_id) VALUES ('" +
-                               foodObject[1] + "'," + foodObject[2] + "," + foodObject[4] + "," +
-                               foodObject[3] + "," + foodObject[5] + "," + foodObject[0] + ")",
-                Connection = conn
-            };
+                // Setup SQL commands insert data
+                SqlCommand cmd = new SqlCommand
+                {
+                    CommandType = CommandType.Text,
+                    CommandText = @"INSERT INTO foods (name, carbohydrates, proteins, fats, calories, added_by_account_id) VALUES ('" +
+                                   foodObject[1] + "'," + foodObject[2] + "," + foodObject[4] + "," +
+                                   foodObject[3] + "," + foodObject[5] + "," + foodObject[0] + ")",
+                    Connection = conn
+                };
 
-            // Open connection
-            conn.Open();
+                // Open connection
+                conn.Open();
 
-            // Execute insert
-            cmd.ExecuteNonQuery();
+                // Execute insert
+                cmd.ExecuteNonQuery();
 
-            // Close connections
-            cmd.Dispose();
-            conn.Close();
+                // Close connections
+                cmd.Dispose();
+                conn.Close();
+            }
         }
 
         // Update selected row of data with changes
@@ -184,7 +184,7 @@ namespace BFT
             }
 
             // After table is written to, refresh food items data grid
-            LoadFoodItemData(_accountID);
+            LoadFoodItemData(Program._accountID);
         }
 
         // Evaluate changes to a food in the database
@@ -195,17 +195,13 @@ namespace BFT
             string foodName = "food";
             decimal carbs = 0.0M, proteins = 0.0M, fats = 0.0M;
 
-            // New DatabaseMethod instance
-            DatabaseMethods db = new DatabaseMethods();
-
-            // Setup connection
-            SqlConnection conn = new SqlConnection(db.DBConnectionString());
-
-            // Setup SQL commands and query
-            SqlCommand cmd = new SqlCommand
+            using (var conn = new SqlConnection(_connectionString))
             {
-                CommandType = CommandType.Text,
-                CommandText = @"SELECT
+                // Setup SQL commands and query
+                SqlCommand cmd = new SqlCommand
+                {
+                    CommandType = CommandType.Text,
+                    CommandText = @"SELECT
                                 id
                                 ,name
                                 ,carbohydrates
@@ -215,71 +211,72 @@ namespace BFT
                                 foods
                                 WHERE
                                 id = " + rowObject[0],
-                Connection = conn
-            };
-            SqlDataReader reader;
+                    Connection = conn
+                };
+                SqlDataReader reader;
 
-            // Open connection
-            conn.Open();
+                // Open connection
+                conn.Open();
 
-            // Query users table
-            reader = cmd.ExecuteReader();
+                // Query users table
+                reader = cmd.ExecuteReader();
 
-            // Read data returned and assign to above variables
-            if (reader.Read())
-            {
-                foodName = reader.GetString(reader.GetOrdinal("name"));
-                carbs = reader.GetDecimal(reader.GetOrdinal("carbohydrates"));
-                proteins = reader.GetDecimal(reader.GetOrdinal("proteins"));
-                fats = reader.GetDecimal(reader.GetOrdinal("fats"));
-            }
+                // Read data returned and assign to above variables
+                if (reader.Read())
+                {
+                    foodName = reader.GetString(reader.GetOrdinal("name"));
+                    carbs = reader.GetDecimal(reader.GetOrdinal("carbohydrates"));
+                    proteins = reader.GetDecimal(reader.GetOrdinal("proteins"));
+                    fats = reader.GetDecimal(reader.GetOrdinal("fats"));
+                }
 
-            // Close connections
-            reader.Close();
-            cmd.Dispose();
-            conn.Close();
+                // Close connections
+                reader.Close();
+                cmd.Dispose();
+                conn.Close();
 
-            // Check database values against new values
-            if (foodName != rowObject[1].ToString() | carbs != Convert.ToDecimal(rowObject[2]) |
-                proteins != Convert.ToDecimal(rowObject[3]) | fats != Convert.ToDecimal(rowObject[4]))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
+                // Check database values against new values
+                if (foodName != rowObject[1].ToString() | carbs != Convert.ToDecimal(rowObject[2]) |
+                    proteins != Convert.ToDecimal(rowObject[3]) | fats != Convert.ToDecimal(rowObject[4]))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
         // Update food in the database
         private void UpdateFood(object[] rowObject)
         {
-            // Setup connection
-            SqlConnection conn = new SqlConnection(_connectionString);
-
-            // Setup SQL commands insert data
-            SqlCommand cmd = new SqlCommand
+            using (var conn = new SqlConnection(_connectionString))
             {
-                CommandType = CommandType.Text,
-                CommandText = @"UPDATE foods SET name = '" + rowObject[1] + "', " +
-                                "carbohydrates = " + rowObject[2] + ", " +
-                                "proteins = " + rowObject[3] + ", " + 
-                                "fats = " + rowObject[4] + ", " +
-                                "calories = (" + rowObject[2] + " * 4.0) + (" + rowObject[3] + " * 4.0) + (" + rowObject[4] + " * 9.0), " + 
-                                "updated_at = GETDATE() " +
-                                "WHERE id = " + rowObject[0],
-                Connection = conn
-            };
+                // Setup SQL commands insert data
+                SqlCommand cmd = new SqlCommand
+                {
+                    CommandType = CommandType.Text,
+                    CommandText = @"UPDATE foods SET name = '" + rowObject[1] + "', " +
+                                    "carbohydrates = " + rowObject[2] + ", " +
+                                    "proteins = " + rowObject[3] + ", " +
+                                    "fats = " + rowObject[4] + ", " +
+                                    "calories = (" + rowObject[2] + " * 4.0) + (" + rowObject[3] + " * 4.0) + (" + rowObject[4] + " * 9.0), " +
+                                    "updated_at = GETDATE() " +
+                                    "WHERE id = " + rowObject[0],
+                    Connection = conn
+                };
 
-            // Open connection
-            conn.Open();
+                // Open connection
+                conn.Open();
 
-            // Execute insert
-            cmd.ExecuteNonQuery();
+                // Execute insert
+                cmd.ExecuteNonQuery();
 
-            // Close connections
-            cmd.Dispose();
-            conn.Close();
+                // Close connections
+                cmd.Dispose();
+                conn.Close();
+            }
         }
 
         // Delete selected row of data - This will only put a data into deleted at column
@@ -294,29 +291,29 @@ namespace BFT
             // Capture food id row
             int foodID = Convert.ToInt32(row.Cells[0].Value);
 
-            // Setup connection
-            SqlConnection conn = new SqlConnection(_connectionString);
-
-            // Setup SQL commands insert data
-            SqlCommand cmd = new SqlCommand
+            using (var conn = new SqlConnection(_connectionString))
             {
-                CommandType = CommandType.Text,
-                CommandText = @"DELETE FROM foods WHERE id = " + foodID,
-                Connection = conn
-            };
+                // Setup SQL commands insert data
+                SqlCommand cmd = new SqlCommand
+                {
+                    CommandType = CommandType.Text,
+                    CommandText = @"DELETE FROM foods WHERE id = " + foodID,
+                    Connection = conn
+                };
 
-            // Open connection
-            conn.Open();
+                // Open connection
+                conn.Open();
 
-            // Execute insert
-            cmd.ExecuteNonQuery();
+                // Execute insert
+                cmd.ExecuteNonQuery();
 
-            // Close connections
-            cmd.Dispose();
-            conn.Close();
+                // Close connections
+                cmd.Dispose();
+                conn.Close();
+            }
 
             // After the record is soft deleted, refresh food items data grid
-            LoadFoodItemData(_accountID);
+            LoadFoodItemData(Program._accountID);
         }
 
         private void btnMainMenu_Click(object sender, EventArgs e)
@@ -326,6 +323,7 @@ namespace BFT
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            Program._runProgram = false;
             Application.Exit();
         }
     }

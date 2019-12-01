@@ -98,7 +98,6 @@
     <Compile Include="frmMainScreen.Designer.cs">
       <DependentUpon>frmMainScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoggedInUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAddEditFood.resx">
@@ -106,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCreateAccount.resx">
       <DependentUpon>frmCreateAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogFood.resx">
+      <DependentUpon>frmLogFood.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLoginScreen.resx">
       <DependentUpon>frmLoginScreen.cs</DependentUpon>

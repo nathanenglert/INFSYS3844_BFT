@@ -28,98 +28,112 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.username_box = new System.Windows.Forms.TextBox();
-            this.pw_box = new System.Windows.Forms.TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoginScreen));
+            this.lblEmail = new System.Windows.Forms.Label();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.tbEmail = new System.Windows.Forms.TextBox();
+            this.tbPassword = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // label1
+            // lblEmail
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(158, 104);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "User Email:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmail.Location = new System.Drawing.Point(289, 115);
+            this.lblEmail.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(149, 51);
+            this.lblEmail.TabIndex = 0;
+            this.lblEmail.Text = "Email:";
             // 
-            // label2
+            // lblPassword
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(158, 173);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 25);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Password: ";
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.Location = new System.Drawing.Point(202, 195);
+            this.lblPassword.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(233, 51);
+            this.lblPassword.TabIndex = 1;
+            this.lblPassword.Text = "Password:";
             // 
-            // button1
+            // btnLogin
             // 
-            this.button1.Location = new System.Drawing.Point(124, 279);
-            this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 44);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "LOGIN";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Location = new System.Drawing.Point(15, 279);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(6);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(300, 100);
+            this.btnLogin.TabIndex = 2;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // button2
+            // btnCreate
             // 
-            this.button2.Location = new System.Drawing.Point(338, 279);
-            this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 44);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "CREATE";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreate.Location = new System.Drawing.Point(337, 279);
+            this.btnCreate.Margin = new System.Windows.Forms.Padding(6);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(300, 100);
+            this.btnCreate.TabIndex = 3;
+            this.btnCreate.Text = "Create Account";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
-            // button3
+            // btnExit
             // 
-            this.button3.Location = new System.Drawing.Point(552, 279);
-            this.button3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 44);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "QUIT";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Location = new System.Drawing.Point(659, 279);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(6);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(300, 100);
+            this.btnExit.TabIndex = 4;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // username_box
+            // tbEmail
             // 
-            this.username_box.Location = new System.Drawing.Point(338, 90);
-            this.username_box.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.username_box.Name = "username_box";
-            this.username_box.Size = new System.Drawing.Size(196, 31);
-            this.username_box.TabIndex = 5;
+            this.tbEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbEmail.Location = new System.Drawing.Point(466, 112);
+            this.tbEmail.Margin = new System.Windows.Forms.Padding(6);
+            this.tbEmail.Name = "tbEmail";
+            this.tbEmail.Size = new System.Drawing.Size(364, 56);
+            this.tbEmail.TabIndex = 5;
             // 
-            // pw_box
+            // tbPassword
             // 
-            this.pw_box.Location = new System.Drawing.Point(338, 173);
-            this.pw_box.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.pw_box.Name = "pw_box";
-            this.pw_box.Size = new System.Drawing.Size(196, 31);
-            this.pw_box.TabIndex = 6;
+            this.tbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPassword.Location = new System.Drawing.Point(466, 192);
+            this.tbPassword.Margin = new System.Windows.Forms.Padding(6);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(364, 56);
+            this.tbPassword.TabIndex = 6;
+            this.tbPassword.UseSystemPasswordChar = true;
             // 
             // frmLoginScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pw_box);
-            this.Controls.Add(this.username_box);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScroll = true;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(974, 429);
+            this.Controls.Add(this.tbPassword);
+            this.Controls.Add(this.tbEmail);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.btnCreate);
+            this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.lblPassword);
+            this.Controls.Add(this.lblEmail);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmLoginScreen";
-            this.Text = "Form1";
+            this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,13 +141,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox username_box;
-        private System.Windows.Forms.TextBox pw_box;
+        private System.Windows.Forms.Label lblEmail;
+        private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button btnCreate;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.TextBox tbEmail;
+        private System.Windows.Forms.TextBox tbPassword;
     }
 }
 
