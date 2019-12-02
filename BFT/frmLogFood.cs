@@ -34,16 +34,17 @@ namespace BFT
                 {
                     CommandType = CommandType.Text,
                     CommandText = @"SELECT 
-                                id AS ID
-                                ,name AS Name
-                                ,carbohydrates AS Carbohydrates
-                                ,proteins AS Proteins
-                                ,fats AS Fats
-                                ,calories AS Calories
-                                FROM foods
+                                foods.id AS ID
+                                ,foods.name AS Name
+                                ,foods.carbohydrates AS Carbohydrates
+                                ,foods.proteins AS Proteins
+                                ,foods.fats AS Fats
+                                ,foods.calories AS Calories
+                                FROM
+                                foods
                                 WHERE
-                                deleted_at IS NULL
-                                AND added_by_account_id = " + Program._accountID +
+                                foods.deleted_at IS NULL
+                                AND foods.added_by_account_id = " + Program._accountID +
                                 "ORDER BY name",
                     Connection = conn
                 };

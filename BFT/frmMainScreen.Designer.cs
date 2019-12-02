@@ -44,14 +44,9 @@
             this.pnlDailyCals = new System.Windows.Forms.Panel();
             this.lblDailyCalories = new System.Windows.Forms.Label();
             this.dgvFoodLog = new System.Windows.Forms.DataGridView();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.calories = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.carbohydrates = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fats = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proteins = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.created_at = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chartFoodLog = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnDeleteMeal = new System.Windows.Forms.Button();
+            this.btnRefreshScreen = new System.Windows.Forms.Button();
+            this.chartFoodLog = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pnlDailyCals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoodLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartFoodLog)).BeginInit();
@@ -154,13 +149,6 @@
             this.dgvFoodLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFoodLog.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvFoodLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFoodLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.name,
-            this.calories,
-            this.carbohydrates,
-            this.fats,
-            this.proteins,
-            this.created_at});
             this.dgvFoodLog.Location = new System.Drawing.Point(32, 463);
             this.dgvFoodLog.Margin = new System.Windows.Forms.Padding(6);
             this.dgvFoodLog.Name = "dgvFoodLog";
@@ -168,101 +156,6 @@
             this.dgvFoodLog.RowHeadersWidth = 82;
             this.dgvFoodLog.Size = new System.Drawing.Size(1613, 717);
             this.dgvFoodLog.TabIndex = 7;
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "name";
-            this.name.HeaderText = "Name";
-            this.name.MinimumWidth = 10;
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // calories
-            // 
-            this.calories.DataPropertyName = "calories";
-            this.calories.HeaderText = "Calories";
-            this.calories.MinimumWidth = 10;
-            this.calories.Name = "calories";
-            this.calories.ReadOnly = true;
-            // 
-            // carbohydrates
-            // 
-            this.carbohydrates.DataPropertyName = "carbohydrates";
-            this.carbohydrates.HeaderText = "Carbs";
-            this.carbohydrates.MinimumWidth = 10;
-            this.carbohydrates.Name = "carbohydrates";
-            this.carbohydrates.ReadOnly = true;
-            // 
-            // fats
-            // 
-            this.fats.DataPropertyName = "fats";
-            this.fats.HeaderText = "Fats";
-            this.fats.MinimumWidth = 10;
-            this.fats.Name = "fats";
-            this.fats.ReadOnly = true;
-            // 
-            // proteins
-            // 
-            this.proteins.DataPropertyName = "proteins";
-            this.proteins.HeaderText = "Proteins";
-            this.proteins.MinimumWidth = 10;
-            this.proteins.Name = "proteins";
-            this.proteins.ReadOnly = true;
-            // 
-            // created_at
-            // 
-            this.created_at.DataPropertyName = "created_at";
-            this.created_at.HeaderText = "Date";
-            this.created_at.MinimumWidth = 10;
-            this.created_at.Name = "created_at";
-            this.created_at.ReadOnly = true;
-            // 
-            // chartFoodLog
-            // 
-            chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Days;
-            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Transparent;
-            chartArea1.AxisX2.MajorGrid.LineColor = System.Drawing.Color.Transparent;
-            chartArea1.AxisX2.Maximum = 2000D;
-            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Transparent;
-            chartArea1.AxisY2.MajorGrid.LineColor = System.Drawing.Color.Transparent;
-            chartArea1.Name = "ChartArea1";
-            this.chartFoodLog.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartFoodLog.Legends.Add(legend1);
-            this.chartFoodLog.Location = new System.Drawing.Point(32, 81);
-            this.chartFoodLog.Margin = new System.Windows.Forms.Padding(6);
-            this.chartFoodLog.Name = "chartFoodLog";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Calories";
-            series1.XValueMember = "created_at";
-            series1.YValueMembers = "calories";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "Carbs";
-            series2.XValueMember = "created_at";
-            series2.YValueMembers = "carbohydrates";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Legend = "Legend1";
-            series3.Name = "Fats";
-            series3.XValueMember = "created_at";
-            series3.YValueMembers = "fats";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Legend = "Legend1";
-            series4.Name = "Proteins";
-            series4.XValueMember = "proteins";
-            series4.YValueMembers = "created_at";
-            this.chartFoodLog.Series.Add(series1);
-            this.chartFoodLog.Series.Add(series2);
-            this.chartFoodLog.Series.Add(series3);
-            this.chartFoodLog.Series.Add(series4);
-            this.chartFoodLog.Size = new System.Drawing.Size(1613, 371);
-            this.chartFoodLog.TabIndex = 8;
-            this.chartFoodLog.Text = "chart1";
             // 
             // btnDeleteMeal
             // 
@@ -276,6 +169,62 @@
             this.btnDeleteMeal.UseVisualStyleBackColor = true;
             this.btnDeleteMeal.Click += new System.EventHandler(this.btnDeleteMeal_Click);
             // 
+            // btnRefreshScreen
+            // 
+            this.btnRefreshScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefreshScreen.Location = new System.Drawing.Point(1657, 293);
+            this.btnRefreshScreen.Margin = new System.Windows.Forms.Padding(6);
+            this.btnRefreshScreen.Name = "btnRefreshScreen";
+            this.btnRefreshScreen.Size = new System.Drawing.Size(300, 100);
+            this.btnRefreshScreen.TabIndex = 10;
+            this.btnRefreshScreen.Text = "Refresh Screen";
+            this.btnRefreshScreen.UseVisualStyleBackColor = true;
+            this.btnRefreshScreen.Click += new System.EventHandler(this.btnRefreshScreen_Click);
+            // 
+            // chartFoodLog
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartFoodLog.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartFoodLog.Legends.Add(legend1);
+            this.chartFoodLog.Location = new System.Drawing.Point(32, 57);
+            this.chartFoodLog.Name = "chartFoodLog";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Calories";
+            series1.XValueMember = "date";
+            series1.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
+            series1.YValueMembers = "calories";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Carbs";
+            series2.XValueMember = "date";
+            series2.YValueMembers = "carbs";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "Fats";
+            series3.XValueMember = "date";
+            series3.YValueMembers = "fats";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Legend = "Legend1";
+            series4.Name = "Proteins";
+            series4.XValueMember = "date";
+            series4.YValueMembers = "proteins";
+            this.chartFoodLog.Series.Add(series1);
+            this.chartFoodLog.Series.Add(series2);
+            this.chartFoodLog.Series.Add(series3);
+            this.chartFoodLog.Series.Add(series4);
+            this.chartFoodLog.Size = new System.Drawing.Size(1613, 397);
+            this.chartFoodLog.TabIndex = 11;
+            this.chartFoodLog.Text = "chart1";
+            this.chartFoodLog.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            this.chartFoodLog.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+            this.chartFoodLog.ChartAreas[0].AxisY2.MajorGrid.Enabled = false;
+            // 
             // frmMainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -284,8 +233,9 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1974, 1229);
-            this.Controls.Add(this.btnDeleteMeal);
             this.Controls.Add(this.chartFoodLog);
+            this.Controls.Add(this.btnRefreshScreen);
+            this.Controls.Add(this.btnDeleteMeal);
             this.Controls.Add(this.dgvFoodLog);
             this.Controls.Add(this.pnlDailyCals);
             this.Controls.Add(this.btnExit);
@@ -317,13 +267,8 @@
         private System.Windows.Forms.Panel pnlDailyCals;
         private System.Windows.Forms.Label lblDailyCalories;
         private System.Windows.Forms.DataGridView dgvFoodLog;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartFoodLog;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn calories;
-        private System.Windows.Forms.DataGridViewTextBoxColumn carbohydrates;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fats;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proteins;
-        private System.Windows.Forms.DataGridViewTextBoxColumn created_at;
         private System.Windows.Forms.Button btnDeleteMeal;
+        private System.Windows.Forms.Button btnRefreshScreen;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartFoodLog;
     }
 }

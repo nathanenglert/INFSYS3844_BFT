@@ -103,17 +103,18 @@ namespace BFT
                 {
                     CommandType = CommandType.Text,
                     CommandText = @"SELECT
-                                id AS ID
-                                ,name AS Name
-                                ,carbohydrates AS Carbohydrates
-                                ,proteins AS Proteins
-                                ,fats AS Fats
-                                ,calories AS Calories
-                                ,CAST(created_at AS DATE) AS Date
-                                FROM foods
+                                foods.id AS ID
+                                ,foods.name AS Name
+                                ,foods.carbohydrates AS Carbohydrates
+                                ,foods.proteins AS Proteins
+                                ,foods.fats AS Fats
+                                ,foods.calories AS Calories
+                                ,CAST(foods.created_at AS DATE) AS Date
+                                FROM
+                                foods
                                 WHERE
-                                deleted_at IS NULL
-                                AND added_by_account_id = " + accountID,
+                                foods.deleted_at IS NULL
+                                AND foods.added_by_account_id = " + accountID,
                     Connection = conn
                 };
                 SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
@@ -202,15 +203,15 @@ namespace BFT
                 {
                     CommandType = CommandType.Text,
                     CommandText = @"SELECT
-                                id
-                                ,name
-                                ,carbohydrates
-                                ,proteins
-                                ,fats
+                                foods.id
+                                ,foods.name
+                                ,foods.carbohydrates
+                                ,foods.proteins
+                                ,foods.fats
                                 FROM
                                 foods
                                 WHERE
-                                id = " + rowObject[0],
+                                foods.id = " + rowObject[0],
                     Connection = conn
                 };
                 SqlDataReader reader;
@@ -297,7 +298,7 @@ namespace BFT
                 SqlCommand cmd = new SqlCommand
                 {
                     CommandType = CommandType.Text,
-                    CommandText = @"DELETE FROM foods WHERE id = " + foodID,
+                    CommandText = @"UPDATE foods SET deleted_at = GETDATE() WHERE id = " + foodID,
                     Connection = conn
                 };
 
