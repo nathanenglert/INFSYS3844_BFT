@@ -147,9 +147,9 @@ namespace BFT
 
                 if (date < xMin) xMin = date.Value;
                 if (date > xMax) xMax = date.Value;
-                if (carb < yMinPrime) yMinPrime = carb.Value;
+                yMinPrime = 0;
                 if (carb > yMaxPrime) yMaxPrime = carb.Value;
-                if (carb < yMinSecond) yMinSecond = cal.Value;
+                yMinSecond = 0;
                 if (cal > yMaxSecond) yMaxSecond = cal.Value;
             }
 
